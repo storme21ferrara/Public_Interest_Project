@@ -1,0 +1,261 @@
+Instance Summary
+Instance ID: i-0a9d607825fa6755f (Project_Phoenix_VPS_Instance)
+Public IPv4 address: 54.206.63.42
+Private IPv4 addresses: 172.31.13.45
+Instance state: Running
+Public IPv4 DNS: ec2-54-206-63-42.ap-southeast-2.compute.amazonaws.com
+Hostname type: IP name: ip-172-31-13-45.ap-southeast-2.compute.internal
+Instance type: t2.micro
+VPC ID: vpc-03b8d678b1e7b8262 (Project_Phoenix_AWS_virtual_network)
+Subnet ID: subnet-09a721c6d1a61a5a7 (Project_phoenix_SUB_03)
+Instance ARN: arn:aws:ec2:ap-southeast-2:022498999546
+/i-0a9d607825fa6755f
+Platform: Linux/UNIX (Inferred)
+AMI ID: ami-0f1f19bc87f2acf07
+AMI name: amzn2-ami-kernel-5.10-hvm-2.0.20240719.0-x86_64-gp2
+Launch time: Sun Aug 04 2024 11:45:52 GMT+1000 (Australian Eastern Standard Time)
+Key pair assigned at launch: Phoenix_Project_Admin
+Owner: 022498999546
+VPC Details
+VPC ID: vpc-03b8d678b1e7b8262 (Project_Phoenix_AWS_virtual_network)
+State: Available
+DHCP option set: dopt-0683c2dc1dc74d1cf
+Main route table: rtb-03b2d2e3fa1c85409 (Project_phoenix_RouteTable)
+IPv4 CIDR: 172.31.0.0/16
+Subnets:
+Project_phoenix_SUB_01: subnet-0e929d29f8fb0c93e (ap-southeast-2a)
+Project_phoenix_SUB_02: subnet-0bda2c0fa29b639a0 (ap-southeast-2c)
+Project_phoenix_SUB_03: subnet-09a721c6d1a61a5a7 (ap-southeast-2b)
+Network ACL
+Network ACL ID: acl-0018c8216aed47a7a
+Associated with: 3 Subnets
+Inbound rules:
+Rule number: 100, Type: All traffic, Protocol: All, Port range: All, Source: 0.0.0.0/0, Allow/Deny: Allow
+Rule number: *, Type: All traffic, Protocol: All, Port range: All, Source: 0.0.0.0/0, Allow/Deny: Deny
+Screenshot 5: Subnet Associations
+Subnets:
+Project_phoenix_SUB_01: subnet-0e929d29f8fb0c93e (ap-southeast-2a)
+Project_phoenix_SUB_02: subnet-0bda2c0fa29b639a0 (ap-southeast-2c)
+Project_phoenix_SUB_03: subnet-09a721c6d1a61a5a7 (ap-southeast-2b)
+Load Balancer
+Load balancer type: Network
+Status: Provisioning
+VPC: vpc-03b8d678b1e7b8262
+Availability Zones:
+subnet-0e929d29f8fb0c93e (ap-southeast-2a)
+subnet-0bda2c0fa29b639a0 (ap-southeast-2c)
+subnet-09a721c6d1a61a5a7 (ap-southeast-2b)
+DNS name: ProjectPhoenixLOADBAL-267e2af042e983c8.elb.ap-southeast-2.amazonaws.com
+Listeners:
+Protocol: TCP, Port: 80, Default action: Forward to target group ProjectPhoenixGRP
+SERIAL PORT: ttyS0
+
+# Define the file paths for the images
+file_paths = [
+    "/mnt/data/Screenshot 2024-08-04 121214.png",
+    "/mnt/data/Screenshot 2024-08-04 121342.png",
+    "/mnt/data/Screenshot 2024-08-04 121431.png",
+    "/mnt/data/Screenshot 2024-08-04 121507.png",
+    "/mnt/data/Screenshot 2024-08-04 121550.png",
+    "/mnt/data/Screenshot 2024-08-04 121619.png",
+    "/mnt/data/Screenshot 2024-08-04 121806.png"
+]
+
+# Extract text from each image
+extracted_texts = [pytesseract.image_to_string(Image.open(file)) for file in file_paths]
+
+# Process and organize the extracted texts
+data = {
+    "Instance ID": [],
+    "Public IPv4 address": [],
+    "Private IPv4 addresses": [],
+    "Instance state": [],
+    "Instance type": [],
+    "VPC ID": [],
+    "IAM Role": [],
+    "Subnet ID": [],
+    "Security Group": [],
+    "Load Balancer ARN": [],
+    "Listeners": [],
+    "DNS name": []
+}
+
+# Define keywords to search for in the extracted texts
+keywords = {
+    "Instance ID": "Instance ID",
+    "Public IPv4 address": "Public IPv4 address",
+    "Private IPv4 addresses": "Private IPv4 addresses",
+    "Instance state": "Instance state",
+    "Instance type": "Instance type",
+    "VPC ID": "VPC ID",
+    "IAM Role": "IAM Role",
+    "Subnet ID": "Subnet ID",
+    "Security Group": "Security Group",
+    "Load Balancer ARN": "Load balancer ARN",
+    "Listeners": "Listeners",
+    "DNS name": "DNS name"
+}
+
+# Extract information based on keywords
+for text in extracted_texts:
+    for key, keyword in keywords.items():
+        if keyword in text:
+            if key == "Listeners":
+                data[key].append(text.split(keyword)[-1].strip().split("\n")[0])
+            else:
+                data[key].append(text.split(keyword)[-1].strip().split()[0])
+
+# Create DataFrame
+df = pd.DataFrame({k: v if v else [""] for k, v in data.items()})
+df.fillna("", inplace=True)
+
+# Save DataFrame to file
+output_file_path = "/mnt/data/Project_Phoenix__Web_Data.csv"
+df.to_csv(output_file_path, index=False)
+output_file_path
+
+
+
+AWSEC2SpotFleetServiceRolePolicy
+AWS managed
+None
+-
+AWSEC2SpotServiceRolePolicy
+AWS managed
+None
+-
+AWSEC2VssSnapshotPolicy
+AWS managed
+None
+This policy is attached to the IAM role that's attached to your Amazon EC2 Windows Instances to enable the Amazon EC2 VSS solution to create and add tags to Amazon Machine Images (AMI) and EBS Snapshots.
+AWSElasticBeanstalkCustomPlatformforEC2Role
+AWS managed
+None
+Provide the instance in your custom platform builder environment permission to launch EC2 instance, create EBS snapshot and AMI, stream logs to Amazon CloudWatch Logs, and store artifacts in Amazon S3.
+AWSElasticDisasterRecoveryEc2InstancePolicy
+AWS managed
+None
+This policy allows installing and using the AWS Replication Agent, which is used by AWS Elastic Disaster Recovery (DRS) to recover source servers that run on EC2 (cross-region or cross-AZ). An IAM role with this policy should be attached (as an EC2 Instance Profile) to the EC2 Instances.
+AWSFaultInjectionSimulatorEC2Access
+AWS managed
+None
+This policy grants the Fault Injection Simulator Service permission in EC2 and other required services to perform FIS actions.
+AWSOpsWorksRegisterCLI_EC2
+AWS managed
+None
+Policy to enable registration of EC2 instances via the OpsWorks CLI
+AWSServiceRoleForEC2ScheduledInstances
+AWS managed
+None
+-
+CloudWatchActionsEC2Access
+AWS managed
+None
+Provides read-only access to CloudWatch alarms and metrics as well as EC2 metadata. Provides access to Stop, Terminate and Reboot EC2 instances.
+EC2FastLaunchFullAccess
+AWS managed
+None
+This policy grants full access to EC2 Fast Launch actions
+EC2FastLaunchServiceRolePolicy
+AWS managed
+None
+-
+EC2FleetTimeShiftableServiceRolePolicy
+AWS managed
+None
+-
+Ec2ImageBuilderCrossAccountDistributionAccess
+AWS managed
+None
+Permissions need by EC2 Image Builder to perform a cross account distribution.
+EC2ImageBuilderLifecycleExecutionPolicy
+AWS managed
+None
+The EC2ImageBuilderLifecycleExecutionPolicy policy grants permissions for Image Builder to perform actions such as deprecate or delete Image Builder image resources and their underlying resources (AMIs, snapshots) to support automated rules for image lifecycle management tasks.
+EC2InstanceConnect
+AWS managed
+None
+Allows customers to call EC2 Instance Connect to publish ephemeral keys to their EC2 instances and connect via ssh or the EC2 Instance Connect CLI.
+Ec2InstanceConnectEndpoint
+AWS managed
+None
+-
+AWSApplicationMigrationServiceEc2InstancePolicy
+AWS managed
+None
+This policy allows installing and using the AWS Replication Agent, which is used by AWS Application Migration Service (AWS MGN) to migrate source servers that run on EC2 (cross-Region or cross-AZ). An IAM role with this policy should be attached (as an EC2 Instance Profile) to the EC2 Instances.
+AWSAutoScalingPlansEC2AutoScalingPolicy
+AWS managed
+None
+AmazonEC2ContainerServiceEventsRole
+AWS managed
+None
+Policy to enable CloudWatch Events for EC2 Container Service
+AmazonEC2ContainerServiceforEC2Role
+AWS managed
+None
+Default policy for the Amazon EC2 Role for Amazon EC2 Container Service.
+AmazonEC2ContainerServiceRole
+AWS managed
+None
+Default policy for Amazon ECS service role.
+AmazonEC2FullAccess
+AWS managed
+Permissions policy (1)
+Provides full access to Amazon EC2 via the AWS Management Console.
+AmazonEC2ReadOnlyAccess
+AWS managed
+None
+Provides read only access to Amazon EC2 via the AWS Management Console.
+AmazonEC2RoleforAWSCodeDeploy
+AWS managed
+None
+Provides EC2 access to S3 bucket to download revision. This role is needed by the CodeDeploy agent on EC2 instances.
+AmazonEC2RoleforAWSCodeDeployLimited
+AWS managed
+None
+Provides EC2 limited access to S3 bucket to download revision. This role is needed by the CodeDeploy agent on EC2 instances.
+AmazonEC2RoleforDataPipelineRole
+AWS managed
+None
+Default policy for the Amazon EC2 Role for Data Pipeline service role.
+AmazonEC2RoleforSSM
+AWS managed
+None
+This policy will soon be deprecated. Please use AmazonSSMManagedInstanceCore policy to enable AWS Systems Manager service core functionality on EC2 instances. For more information see https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-profile.html
+AmazonEC2RolePolicyForLaunchWizard
+AWS managed
+None
+Managed policy for the Amazon LaunchWizard service role for EC2
+AmazonEC2SpotFleetAutoscaleRole
+AWS managed
+None
+Policy to enable Autoscaling for Amazon EC2 Spot Fleet
+AmazonEC2SpotFleetTaggingRole
+AWS managed
+None
+Allows EC2 Spot Fleet to request, terminate and tag Spot Instances on your behalf.
+AmazonElasticMapReduceforEC2Role
+AWS managed
+None
+Default policy for the Amazon Elastic MapReduce for EC2 service role.
+AmazonSSMManagedEC2InstanceDefaultPolicy
+AWS managed
+None
+This policy enables AWS Systems Manager functionality on EC2 instances.
+AWSApplicationAutoscalingEC2SpotFleetRequestPolicy
+AWS managed
+None
+-
+AWSApplicationMigrationEC2Access
+AWS managed
+None
+This policy provides Amazon EC2 oper
+AmazonEC2ContainerRegistryFullAccess
+AWS managed
+None
+Provides administrative access to Amazon ECR resources
+AmazonEC2ContainerRegistryPowerUser
+AWS managed
+None
+Provides full access to Amazon EC2 C

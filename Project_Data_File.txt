@@ -1,0 +1,67 @@
+
+Memory updated
+Here is the consolidated information extracted from your screenshots and the memory entry:
+
+Instance Details:
+
+Instance ID: i-0a9d607825fa6755f (Project_Phoenix_VPS_Instance)
+Public IPv4 address: 54.206.63.42
+Private IPv4 addresses: 172.31.13.45
+Instance state: Running
+Public IPv4 DNS: ec2-54-206-63-42.ap-southeast-2.compute.amazonaws.com
+Hostname type: IP name: ip-172-31-13-45.ap-southeast-2.compute.internal
+Instance type: t2.micro
+VPC ID: vpc-03b8d678b1e7b8262 (Project_Phoenix_AWS_virtual_network)
+Subnet ID: subnet-09a721c6d1a61a5a7 (Project_phoenix_SUB_03)
+Instance ARN: arn:aws:ec2:ap-southeast-2:022498999546/i-0a9d607825fa6755f
+Platform: Linux/UNIX (Inferred)
+AMI ID: ami-0f1f19bc87f2acf07
+AMI name: amzn2-ami-kernel-5.10-hvm-2.0.20240719.0-x86_64-gp2
+Launch time: Sun Aug 04 2024 11:45:52 GMT+1000 (Australian Eastern Standard Time)
+Key pair assigned at launch: Phoenix_Project_Admin
+Owner: 022498999546
+VPC Details:
+
+VPC ID: vpc-03b8d678b1e7b8262 (Project_Phoenix_AWS_virtual_network)
+State: Available
+DHCP option set: dopt-0683c2dc1dc74d1cf
+Main route table: rtb-03b2d2e3fa1c85409 (Project_phoenix_RouteTable)
+IPv4 CIDR: 172.31.0.0/16
+Subnets:
+
+Project_phoenix_SUB_01: subnet-0e929d29f8fb0c93e (ap-southeast-2a)
+Project_phoenix_SUB_02: subnet-0bda2c0fa29b639a0 (ap-southeast-2c)
+Project_phoenix_SUB_03: subnet-09a721c6d1a61a5a7 (ap-southeast-2b)
+Network ACL:
+
+Network ACL ID: acl-0018c8216aed47a7a
+Associated with: 3 Subnets
+Inbound rules:
+Rule number: 100, Type: All traffic, Protocol: All, Port range: All, Source: 0.0.0.0/0, Allow/Deny: Allow
+Rule number: *, Type: All traffic, Protocol: All, Port range: All, Source: 0.0.0.0/0, Allow/Deny: Deny
+Load Balancer:
+
+Load balancer type: Network
+Status: Active
+VPC: vpc-03b8d678b1e7b8262
+Availability Zones:
+subnet-0e929d29f8fb0c93e (ap-southeast-2a)
+subnet-0bda2c0fa29b639a0 (ap-southeast-2c)
+subnet-09a721c6d1a61a5a7 (ap-southeast-2b)
+DNS name: ProjectPhoenixLOADBAL-267e2af042e983c8.elb.ap-southeast-2.amazonaws.com
+Listeners:
+Protocol: TCP, Port: 80, Default action: Forward to target group ProjectPhoenixGRP
+Security Groups:
+
+Project_phoenix_SEC_Group:
+
+Security group ID: sg-0f81d1a578a73a657
+Description: ADMIN_Acess_All
+Inbound rules: None
+Outbound rules: 1 Permission entry
+default:
+
+Security group ID: sg-04d2d9449df485662
+Description: default VPC security group
+Inbound rules: 1 Permission entry (All traffic)
+Outbound rules: 1 Permission entry
