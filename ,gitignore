@@ -1,0 +1,67 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environments
+venv/
+venv_openvino/
+venv_python_3_12/
+
+# Ignore node modules
+node_modules/
+
+# Ignore other unnecessary directories and files
+.vs/
+.coverage
+Backup_Project_SCripts/
+Backups/
+CYGWin_Packages/
+Cloudflare/
+Conda/
+Data/
+Downloads/
+Eclipse IDE/
+Home Network 005.png
+Home Network printer.png
+IMP3/
+Intel_Graphics_Compiler/
+Keys/
+Lib/
+public_interest_project/
+console-menu-0.8.0/
+create_directories.bat
+deepvoice-model-utilities/
+distutils/
+env/
+executorch/
+face-alignment/
+fairseq/
+freetype2/
+intel-graphics-compiler/
+jade/
+llvm-project/
+neo/
+node/
+node_modules/
+oldp/
+opencl-clang/
+opencv-4.x/
+openjpeg/
+openlaw-client/
+openssl-3.3.1/
+openvino_genai/
+package-lock.json
+package.json
+poppler-24.07.0/
+poppler/
+powershell_cmd_scripts/
+serving/
+setuptools/
+systempathcleaned.ps1
+transformers/
+userpathcleaned.ps1
+vc-intrinsics/
+vcpkg/
+zlib-1.3.1/
+Directory_setup.py
+Directory_tree/
